@@ -1,0 +1,157 @@
+% !TeX spellcheck = en_US
+% 特殊注释, 告知编译器使用美国英语作为拼写检查的语言
+
+\documentclass[UTF8,a4paper,twoside]{ctexrep}  % 选项分别是UTF-8编码, A4纸张大小, 双面打印
+% \documentclass[a4paper,UTF8,fontset=none]{ctexrep}  % fontset=none是为了后面指定自定义字体
+
+\usepackage{amsmath,amssymb,amsfonts}  % 数学相关
+\usepackage{ctex}
+\usepackage{geometry}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{verbatim}
+
+\usepackage[colorlinks=true,allcolors=black]{hyperref}  % 链接相关, 设置为有颜色, 颜色是黑色, 下面选项类似
+%\usepackage[colorlinks=true,linkcolor=black,citecolor=black，urlcolor=black]{hyperref}
+%\usepackage[colorlinks=true]{hyperref}
+
+\usepackage[nameinlink]{cleveref}  % 针对章节、图表和公式的**标签**
+%\usepackage[labelsep=space,labelformat=dash]{caption}  % 用于设置图表和表格标题的格式, 分别是标签和文本有空格和标签和文本有破折号
+
+\makeindex
+
+% ctex
+% \setCJKfamilyfont{BoldFont=SimHei,ItalicFont=KaiTi}{SimSun}  % 粗体使用SimHei, 斜体使用KaiTi
+\setCJKmainfont[BoldFont=SimHei]{SimSun}  % 使用SimHei作为中文粗体  % 对应rm罗马
+\setCJKsansfont{SimHei}  % 使用SimHei作为中文无衬线字体  % 对应sf无衬线
+\setCJKmonofont{FangSong}  % 使用FangSong作为中文等宽字体  % 对应tt打字机
+% fontspec, 是XeLaTeX和LuaLaTeX字体选择工具
+\setmainfont{Times New Roman}  % 使用Times New Roman作为主要西文字体
+\setmonofont{Times New Roman}  % 使用Times New Roman作为等宽西文字体
+
+
+\geometry{left=3.18cm,right=3.18cm,top=2.54cm,bottom=2.54cm}  % 设置页边距
+\linespread{1.5}  % 设置行距 (latex基础行距默认为1.2, 而word中默认为1.3)
+
+\ctexset{
+	chapter={
+		name={第,章},
+		number=\arabic{chapter},
+		format=\raggedright\bfseries\zihao{3},
+		beforeskip=0ex,
+		afterskip=0.5ex,
+		aftername=\enspace,
+	},
+	section={
+		format=\raggedright\bfseries\zihao{4},
+		beforeskip=0.5ex,
+		afterskip=0ex,
+		aftername=\enspace,
+	},
+	subsection={
+		format=\raggedright\bfseries\zihao{-4},
+		beforeskip=1ex,
+		afterskip=1ex,
+		aftername=\enspace,
+	},
+	contentsname={\hfill\zihao{3}\textbf{目 \quad 录}\hfill}
+}
+
+% \usepackage{titlesec}  % 设置标题样式 
+% \titleformat{\chapter}{\zihao{3}\bfseries}{第\,\arabic{chapter}\,章}{\enspace}{}  % 设置一级标题左对齐，中文字体为黑体，英文字体为Times New Roman，字号为三号
+
+% \DeclareCaptionLabelFormat{dash}{#1 \arabic{chapter}--\arabic{figure}}
+% \DeclareCaptionLabelSeparator{dash}{-}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\renewcommand{\thefigure}{\arabic{chapter}--\arabic{figure}}
+\renewcommand{\thetable}{\arabic{chapter}--\arabic{table}}
+% \makeatletter
+% \crefformat{figure}{#2\cref@figure@name~\thefigure#3}
+% \makeatother
+% \captionsetup[figure]{labelsep=space,labelformat=dash,font={small,bf}}
+\DeclareCaptionFont{five}{\zihao{5}\bfseries}
+\captionsetup[figure]{labelsep=space,font=five}
+\captionsetup[table]{labelsep=space,font=five,position=top}
+
+\usepackage{titling}
+% Title Page
+\title{论文题目}
+%\author{作者姓名}
+
+\usepackage{fancyhdr}  % 定义页眉页脚
+
+\fancypagestyle{tocstyle}{
+	\fancyhf{} % clear all header and footer fields
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[C]{\zihao{-5}\thepage}
+}
+\fancypagestyle{mainstyle}{
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0.3pt}
+	\fancyhead[CO]{\zihao{5}\texttt{浙江理工大学本科毕业设计（论文）}}
+	\fancyhead[CE]{\zihao{5}\texttt{\thetitle}}
+	\fancyfoot[CE,CO]{\zihao{-5}\thepage}
+}
+
+\usepackage{placeins}
+\usepackage{xcolor}
+\usepackage[cache=false]{minted}
+\setminted{
+	frame=lines,
+	framesep=2mm,
+	baselinestretch=1.2,
+%	bgcolor=lightgray,
+	fontsize=\footnotesize,
+	linenos
+}
+
+\graphicspath{{figure/}}
+
+\usepackage{tocloft}
+\setlength\cftbeforetoctitleskip{0ex}
+\setlength\cftaftertoctitleskip{0ex}
+\setlength\cftbeforechapskip{0ex}
+\setlength\cftbeforepartskip{0ex}
+\renewcommand{\cftpartfont}{\zihao{4}\bfseries}
+\renewcommand{\cftsecfont}{\zihao{5}\mdseries}
+\renewcommand{\cftsubsecfont}{\zihao{5}\ttfamily}
+\renewcommand{\cftchappagefont}{\mdseries}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+\usepackage{pdfpages}
+
+% GB/T 7714-2015标准
+\usepackage[backend=biber,style=gb7714-2015,gbnoauthor=true]{biblatex}
+\addbibresource{thesis.bib}
+
+\begin{document}
+\zihao{-4}
+
+\includepdf[pages=-]{诚信声明.pdf}
+\include{chapter/abstract}
+
+\pdfbookmark[0]{目录}{bookmark:目录}
+\pagestyle{tocstyle}
+\fancypagestyle{plain}{
+    \pagestyle{tocstyle}
+}
+\pagenumbering{Roman}
+\tableofcontents
+
+\clearpage
+\pagestyle{mainstyle}
+\fancypagestyle{plain}{
+    \pagestyle{mainstyle}
+}
+\pagenumbering{arabic}
+
+% \include{chapter/introduction}
+% 
+% \include{chapter/bibliography}
+% \include{chapter/thanks}
+
+\end{document}
