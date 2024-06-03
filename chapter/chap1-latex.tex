@@ -1,0 +1,38 @@
+\chapter{看待LaTeX语法的一个视角}
+
+\begin{itemize}
+    \item {
+        语法教程链接
+        \begin{itemize}
+            \item \href{https://zhuanlan.zhihu.com/p/521649367?utm_source=zhihu}{知乎·槿灵兮·【LaTeX】针对萌新自学者的入门教程}
+        \end{itemize}
+    }
+\end{itemize}
+
+\section{如何实现内容和格式分离}
+
+
+笔者仅在这里表达对LaTeX语法设计哲学的思考。如果读者之前接触过XML、HTML这样的标记语言，甚至接触过Typst这样LaTeX的“竞品”，更能对LaTeX的语法设计有感悟。
+
+作为标记语言，源码仅是文本文件（对比Word的二进制文件），那么如何在文本文件中同时表达内容和格式呢？这就是LaTeX中的Command——以\verb|\|开头的命令。
+
+\begin{itemize}
+    \item 命令可以直接使用，比如\verb|\checkmark|是\checkmark，\verb|\makeindex|是让项目建立索引。
+    \item 命令可以接参数，比如\verb|\subsection{子标题}|表示创建一个子标题，并用\verb|{}|中的内容作为子标题内容。多个参数由多个\verb|{}|包括。
+    \item 命令可以接选项，比如\verb|\command[]{}|，这里的\verb|[]|中可以添加参数。
+    \item 命令还有变体，比如\verb|\section{}|和\verb|\section*{}|效果是不一样的。
+\end{itemize}
+
+上面的后两者在论文中不用关心。
+
+在LaTeX中可以用大括号\verb|{}|包裹内容，除此之外，还能用\verb|\begin|和\verb|\end|包裹内容，当然，这也是命令，可以接受参数，后面会讲到。
+
+\section{标记系统中如何处理空白}
+
+如果读者学过编译原理，就了解token这个概念，语法中划分通常使用空白划分token，比如空格、换行、制表。但是在标记系统中，内容和命令是共存的，编译器怎么知道空白是命令的部分还是属于内容本身？
+
+\begin{itemize}
+    \item 文本和文本之间，空格和制表是被忽略的，想添加空格需要使用命令\verb|\quad|；换行相当于空格，想换段需要空行。
+    \item 文本和命令以及命令相关符号（大括号和中括号）之间，无参数的命令和之后的文本肯定是需要空白的，不然无法划分token，命令和之前的文本的空格是有意义的，因为有\verb|\|划分，其他同上。
+    \item 命令和命令之间是忽略空白的。
+\end{itemize}

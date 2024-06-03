@@ -1,0 +1,51 @@
+\chapter{链接}
+
+对被链接物的命名以及排序会由LaTeX自动完成。
+
+\section{图片}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{g}  % 文件名（没有后缀名）
+    \caption{浙江理工大学校徽}  % 图片名
+    \label{fig:g}  % 图片标记名，用于引用
+\end{figure}
+
+\cref{fig:g}
+
+\autoref{fig:g}  % 英文，不用
+
+\section{表格}
+
+\begin{table}[htbp]
+    \caption{表格名}  % 表格名
+    \label{tab:t}  % 表格标记名，用于引用
+    \zihao{-5}
+    \centering
+    \begin{tabular}{c c c c}
+        \hline
+        表头1   & 表头2   & 表头3   \\
+        \hline
+        行1元素1 & 行1元素2 & 行1元素3 \\
+        行2元素1 & 行2元素2 & 行2元素3 \\
+        行3元素1 & 行3元素2 & 行3元素3 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\cref{tab:t}
+
+\autoref{tab:t}  % 英文，不用
+
+\section{公式}
+
+\begin{equation}
+    \label{eq:m}
+    This \quad is \quad a \quad mathematical \quad formula.
+\end{equation}
+
+\ref{eq:m}
+
+\section{文献}
+
+喏\cite{vaswani_attention_2023}
